@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>JavaScript</title>
+<!--link rel='stylesheet' href='styles.css'-->
+<style>
+	#events p {
+		width: 200px;
+		height: 200px;
+		margin: 10px; 
+		background-color: #cccccc;
+		float: left;
+	}
+	#events .highlight {
+    	background-color: #ff0000;
+    }
+    .error {
+        background: #ff9999;
+        border: #990000 1px solid;
+        display: none;
+    }
+    #square1, #square2 {
+		margin: 50px;
+		width: 100px;
+		height: 100px;
+		background: #dd1166;
+	}
+</style>
+
+</head>
+<body>
+    <h1 id="title">Test page</h1>
+
+    <h1>To do list</h1>
+
+<form id="input">
+    <label for='name'>Name:</label>
+    <input type='text' id="name" name='name' autofocus required >
+    <button type='submit'>Submit</button>
+</form>
+<ul id='list'></ul>
+
+
+	<div id='square1'></div>
+	<div id='square2'></div>
+
+	<canvas id='canvas' width='400' height='400'>
+		Sorry, but your browser does not support the canvas element
+	</canvas>
+
+    <p class="para para-1">Lorem ipsum....</p>
+    <p class="para para-2">Lorem ipsum....</p>
+    <div id="wrap">
+	    <ul>
+	    	<li class="first">item 1</li>
+	    	<li class="even">item 2</li>
+	    	<li class="last">item 3</li>
+	    </ul>
+	</div>
+
+	<div id="events">
+		<p id='click'>Click On Me</p>
+		<p id='mouse'>Hover On Me</p>
+	</div>
+
+	<div id='hero' data-powers='flight superSpeed'>Superman</div>
+
+
+	<form name='search' action='/search'>
+	    <input name='searchInput'>
+	    <button type='submit'>Search</button>
+	</form>
+
+	<br />
+	
+
+	<form id='hero' style="clear:both">
+	    <label for='heroName'>Name:
+			<input type='text' id='heroName' name='heroName' autofocus placeholder='Your Super Hero Name' maxlength='32' required> 
+		</label>
+
+
+		<p>Super Powers:</p>
+		<label for='flight'>Flight:
+			<input type='checkbox' id='flight' value='Flight' name='powers'>
+		</label>
+		<label for='strength'>Super Strength:
+			<input type='checkbox' id='strength' value='Strength' name='powers'>
+		</label>
+		<label for='speed'>Super Speed:
+			<input type='checkbox' id='speed' value='Super Speed' name='powers'>
+		</label>
+		<label for='energy'>Energy Blasts:
+			<input type='checkbox' id='energy' value='Energy Blasts' name='powers'>
+		</label>
+		<label for='telekinesis'>Telekinesis:
+			<input type='checkbox' id='telekinesis' value='Telekinesis' name='powers'> 
+		</label>
+
+		<p>What type of hero are you?</p>
+		<label for='hero'>Hero:
+			<input type='radio' name='category' value='Hero' id='hero'>
+		</label>
+		<label for='villain'>Villain:
+			<input type='radio' name='category' value='Villain' id='villain'>
+		</label>
+		<label for='anti-hero'>Anti-Hero:
+			<input type='radio' name='category' value='Antihero' id='anti-hero'>
+		</label>
+
+		<label for='City'>Base of Operations:
+		<select name='city' id='city'>
+			<option value='' selected>Choose a City</option>
+			<option value='Metropolis'>Metropolis</option>
+			<option value='Gotham City'>Gotham City</option>
+			<option value='Keystone City'>Keystone City</option>
+			<option value='Coast City'>Coast City</option> 
+			<option value='Star City'>Star City</option> 
+		</select>
+		</label>
+
+		<br /><br />
+		<label for='origin'>Origin Story:
+ 			<textarea id='origin' name='origin' rows='20' cols='60'></textarea> 
+ 		</label>
+
+ 		<br /><br />
+ 		<button type='reset'>Reset</button>
+	    <button type='submit' id="submit">Submit</button>
+	</form>
+
+
+<script>
+	const p = console.log;
+</script>
+<!--script src='js101.js'></script>
+<script src='arrays.js'></script>
+<script src='functions.js'></script>
+<!script src="objects.js"></script>
+<script src="dom.js"></script>
+<script src="events.js"></script>
+<script src="forms.js"></script>
+<script src="window.js"></script>
+<script src="test-debug.js"></script>
+<script src='advanced-functions.js'></script-->
+<script src="oop.js"></script>
+<!--script src="ajax.js"></script>
+<script src="html5-api.js"></script>
+<script src="modern.js"></script-->
+</body>
+</html>

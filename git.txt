@@ -1,0 +1,187 @@
+
+GIT COMMANDS
+=================#
+
+Note: commands uppercased for readability only. In practice use lowercase.
+------
+
+GIT INIT [--bare central-repo.git]
+# creates git repository in current directory
+## --bare creates central repository. Unable to develop in it.
+
+
+GIT CONFIG [--global] [user.name "bob"] [user.email "bob@mail.com"]
+# user details (--global for all repositories)
+
+
+GIT STATUS
+# view status of each file. Shows nothing to commit if state is equal to repository.
+
+
+GIT ADD [filename/s], [dir] [.] [-A]
+# add to snapshot (stage). (i.e. which files to include in next commit)
+## -A adds all
+### . adds all without deleted
+
+
+GIT RM <filename>
+# remove file. Stop tracking if new, delete if existing.
+
+
+GIT COMMIT [-a] [-m "message"] [--amend]
+# record snapshot to repository history
+## -a is shortcut for 'git add'. Automatically include all tracked files in commit.
+### --amend add changes to most recent commit instead of creating a new commit 
+
+
+GIT LOG [--oneline] [filename] [-n 3/4] [--stat] [sinceBranch/ID..untilBranch/ID]
+# view commit history (of current branch) including checksum (commit ID). --oneline condenses output. 
+## filename shows history for that file only.
+### -n 3/4 shows last 3/4 commits only
+#### --stat shows info about amended files for each commit
+##### display commits reachable from untilBranch but not from sinceBranch (diff)
+
+
+
+GIT CHECKOUT [34560a3] [v.1.0] [master/branchName] [-b] [filename]
+# set working directory to specific snapshot ([commit ID] [tag]). DETACHED HEAD state - not currently on any branch becuase [x] branch has more recent commits!! NEVER make changes directly on previous commit... instead create a new branch from it.
+## set CWD to master/branch
+### -b <newBranch> shortcut for creating new branch and checking it out immediately
+#### adding '<commitID> <filename>' reverts file to specified commit in working directory
+
+
+GIT TAG [-a v1.0 -m "stable version..."]
+# tag important versions. Can then checkout with name (v1.0) instead of commit ID.
+## (without args) view list of existing tags
+
+
+GIT REVERT (ID of commit to undo)
+# undo commit (latest only?). Does NOT remove commit but instead adds another commit with reverted state. Keeps history intact.
+
+
+GIT RESET [--hard] [--mixed] [HEAD[~<n>]] [filename]
+# unstage files. With no arg contents remain the same (i.e in amended state)
+## --hard updates/reverts the files also. PERMANENTLY undoes uncommitted changes (no history)!
+### --mixed moves HEAD but working directory MAINTAINS changes (i.e. contains uncommitted modifications)
+#### HEAD[~<n>] reset to HEAD minus <n>. Throw away latest commits.
+##### adding <filename> changes file in staging area but not working directory/branch to specified commit. (i.e. unstage a file) 
+
+
+GIT CLEAN -f
+# remove all untracked files. PERMANENTLY remove (no history)!
+
+
+GIT BRANCH [newBanchName] [-d branchName] [-D branchName] [-r]
+# No args lists existing branches for project. Asterisk identifies currently checked out branch.
+## create new branch from current snapshot/commit. (Does NOT automatically check out new branch! Use git checkout -b branchName to create and checkout with single cmd)
+### -d delete branch
+#### -D delete branch containing unmerged changes (-d won't allow)
+##### -r show remote branches
+
+
+GIT MERGE <targetBranchName> [--no-ff]
+# merge target branch INTO current branch. Results in either fast-forward merge, or merge commit if target has diverged (3 way)
+# --no-ff adds a dedicated merge commit when merge would normally produce FF merge
+
+
+GIT REBASE <newBase> [-i] [--continue] [--abort]
+# rebase current branch onto tip of newBase branch (or commit ID!) Allows FF merge if no conflicts.
+## -i for !!!!INTERACTIVE REBASE!!!! Allows you to modify commit history during rebase. Can replace the 'pick' command with 'edit' and 'squash' for example. Can also alter snapshot during this process. WARNING!!!: Interactive rebase alters history by re-writing commits with new ID (can cause problems with other developers history).
+### --continue procedes with interactive rebase after pause for commit amends/edits etc
+#### --abort cancels interactive rebase during process  (start again!)
+
+
+GIT REFLOG
+# shows chronological listing of every change to repository
+
+
+GIT CLONE existingDirectory [newDirectory]
+# creates new directory/repo as a copy of existing repo (INSIDE CWD as sub-directory)
+## if newDirectory is omitted it will use existing name
+
+
+GIT REMOTE [-v] [add identifier repoPath]
+# lists connections to other repositories. When you clone a repository git will add a remote called 'origin'. This is the designated path for PUSH and FETCH operations.
+## -v shows full path to origin
+### add a remote reference and path if needed (i.e. current repo not cloned from remote)
+
+
+GIT FETCH <repo/branch>
+# fetch from remote repository but does not merge them in. Updates working directory only so will still need to merge/rebase changes??
+
+
+GIT PUSH [remote localBranchName]
+# add local branch to remote 
+
+
+GIT PULL <repo/branch>
+# fetch and merge. Incorporate target commits.
+
+
+GIT FORMAT-PATCH <branchName>
+# creates a patch file/email (with diffs) for last COMMIT (and every commit that's missing in branchName) that can easily be shared
+
+
+GIT AM
+# apply patch to current branch
+
+
+GIT ARCHIVE <branchName> --format=[zip/tar] --output=[path + artifactName]
+# compress branch into artifact and remove git
+
+
+GIT BUNDLE create <file> <branchName>
+# export a branch (inc. history) to a file
+
+
+GIT STASH
+# clean working directory but temp save changes (also handy for moving edits to different branch as stashed changes can be re-applied anywhere)
+
+
+GIT STASH APPLY
+# retrieve stashed changes
+
+
+GIT DIFF [HEAD~2..HEAD~1] [branchName..branchName] [commitID??..] [--cached]
+# show exact changes
+## -- cached shows diff between last commit and staged snapshot!
+
+
+---------
+
+Git hooks - can be used to execute scripts on a particular git cmd. For example publish/archive site when commiting to master: enforce commit policy etc etc.
+See .git/hooks directory. Remove .sample from file and add script to enable.
+
+
+Git aliases - allow you to define shortcuts for commands (in config file)
+
+---------
+
+TIPS:
+
+	* During rebase, fix merge conflicts and ADD them only. No need to COMMIT fixes as this will result in merge commit which is exactly what rebase is trying to avoid.
+
+	* Revert the commit you want to undo. NOT the commit you want to undo TO.
+
+	* Reset (--hard) to undo changes in staging (and WD). 
+
+	* Checkout <ID> to revert to that commit. However this is HEADLESS (HEAD points to commit, not branch) so need to create new branch from that point in order to make further amends. Previous branch becomes useless!! Most useful for viewing previous state.
+	
+	* Checkout <file> doesn't move HEAD so you can revert to/stage old version of that file!!!!!!!!
+
+	* Reset (ID/branch) moves HEAD (completely removes later commits). Use with caution on shared repo as this will alter history. Revert may be safer option.
+
+	* git commit --amend allows you to add to/edit most recent commit. PRETTY HANDY!!
+
+	* Fetch to sync repo with remote. Will NOT effect WD so will need to merge or checkout branch.
+
+
+RESOURCES:
+	https://stackoverflow.com/questions/3639342whats-the-difference-between-git-reset-and-git-checkout
+	https://www.atlassian.com/git/tutorials/undoing-changes
+	https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting
+
+
+
+
+

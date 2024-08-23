@@ -63,7 +63,7 @@ p(superman.hasOwnProperty('name'));			// true				Only checks THIS object
 /////// Find all properties
 p('bbbbbbb');
 for(const key in superman) {
-	if(superman.hasOwnProperty(key)) {							// Explicitly avoid inherited props
+	if(superman.hasOwnProperty(key)) {					// Explicitly avoid inherited props
 		p(`name: ${key} , value: ${superman[key]}`);
 	}
 }

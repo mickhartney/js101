@@ -15,7 +15,7 @@ fetch('https://swapi.co/api/people/1')
 
 // Blob - raw data such as image or spreadsheet
 fetch(url)
- 	.then( response => response.blob() ); 	// transforms the data into a blob object
+ 	.then( response => response.blob() ) 	// transforms the data into a blob object
 	.then( blob => console.log(blob.type) )
 	.catch( error => console.log('There was an error: ', error));
 

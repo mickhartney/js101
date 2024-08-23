@@ -42,7 +42,7 @@ p(square.call(null, 5));				// 25  (function not using 'this')
 /* call with parameters */
 sayHello.call(bloke);					// 'Hello, my name is Jim'
 sayHello.call(bloke, 'How do you do');	// 'How do you do, my name is Jim'
-p(sum.call(null, 2, 2));				// 4 - pass multiple parameters seperately
+p(sum.call(null, 2, 2));				// 4 - pass multiple parameters separately
 
 
 ////// APPLY
@@ -306,7 +306,7 @@ roll.then(result => {
 async function loadGame(userName) {					// function preceded by async keyword to run ASYNC
     try {											// contain errors
     	const user = await login(userName);			// await operator wraps return in promise which is assigned to var
-    	const info = await getPlayerInfo (user.id);	// not executed until previous promise fulfulled
+    	const info = await getPlayerInfo (user.id);	// not executed until previous promise fulfilled
     	// load the game using the returned info
     }
     catch (error) {									// handle errors
@@ -488,7 +488,7 @@ function myMultiplier(x) {
 	}
 }
 
-const double = myMultiplier(2);		// NB: this is bsic example of CURRYING FUNCTION
+const double = myMultiplier(2);		// NB: this is basic example of CURRYING FUNCTION
 const triple = myMultiplier(3);
 p(double(5));						// 10
 p(triple(5));						// 15
@@ -502,7 +502,7 @@ p(myMultiplier(3)(2));	// !!'multiplier(3)'returns function which can be immedia
 
 function oldMultiplier(a, b) {		// simple old school
 	return a * b;
-};	
+}
 
 function multiplier(a, b) {
 	if(b === undefined) {		// allows currying if only one arg supplied

@@ -10,7 +10,7 @@
 ////////////////////////// CONSTRUCTORS (legacy!!)
 
 const Dice = function(sides=6) {
-	this.sides = sides,
+	this.sides = sides;
 	this.roll = function() {
 		p(Math.ceil(Math.random() * this.sides));
 	}
